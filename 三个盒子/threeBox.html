@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      line-height: 200px;
+      text-align: center;
+    }
+    .container {
+      width: 100%;
+      background: #ddd;
+      /* overflow: hidden; */
+    }
+    .container:after {
+      content:'';
+      display: block;
+      clear: both;
+    }
+    .f-left {
+      float: left;
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+    .f-middle {
+      margin-left: 200px;
+      margin-right: 200px;
+      height: 200px;
+      background: yellow;
+      word-wrap:break-word;
+    }
+    .f-right {
+      float: right;
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+    .p-container {
+      width: 100%;
+      background: #ddd;
+      position: relative;
+      height: 200px;
+    }
+    .p-left {
+      position: absolute;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+    .p-middle {
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 200px;
+      background: yellow;
+    }
+    .p-right {
+      position: absolute;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+    .d-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      background:#ddd;
+    }
+    .d-container div {
+      width: 200px;
+      height: 200px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="f-left">我是左浮动的盒子</div>
+    <div class="f-right">我是右浮动的盒子</div>
+    <div class="f-middle">我是居中的盒子</div>
+  </div>
+  <hr>
+  <div class="p-container">
+    <div class="p-left">我是左定位的盒子</div>
+    <div class="p-middle">我是居中的盒子</div>
+    <div class="p-right">我是右定位的盒子</div>
+  </div>
+  <hr>
+  <div class="d-container">
+    <div class="d-left">我是左定位的盒子</div>
+    <div class="d-middle">我是居中的盒子</div>
+    <div class="d-right">我是右定位的盒子</div>
+  </div>
+</body>
+</html>

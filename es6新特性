@@ -1,0 +1,95 @@
+1. 块级作用域let & const
+  Q: var和let作用域，和const三者的区别
+2. iterable类型
+  Array、Map、Set属于iterable类型, 只有此类型才可以用for...of遍历
+
+  1). Set是类数组,其中的元素是唯一的, NaN和undefined都可以被存储在Set中, NaN之间被视为相同的值(尽管NaN !== NaN)
+    四个操作方法：
+      add(value)：添加某个值，返回Set结构本身。
+      delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+      has(value)：返回一个布尔值，表示该值是否为Set的成员。
+      clear()：清除所有成员，没有返回值
+    set内部的元素可以遍历for...of...
+    Q: 字符串去重
+
+  2). Map结构提供了“值—值”的对应，是一种更完善的Hash结构实现。如果你需要“键值对”的数据结构，Map比Object更合适。
+    它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。
+      var m = new Map();
+      var o = {p: "Hello World"};
+
+      m.set(o, "content")
+      m.get(o) // "content"
+
+      m.has(o) // true
+      m.delete(o) // true
+      m.has(o) // false
+
+      注意，只有对同一个对象的引用，Map结构才将其视为同一个键。这一点要非常小心。
+        var map = new Map();
+        map.set(['a'], 555);
+        map.get(['a']) // undefined
+      上面代码的set和get方法，表面是针对同一个键，但实际上这是两个值，内存地址是不一样的，因此get方法无法读取该键，返回undefined。
+      如果Map的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map将其视为一个键，包括0和-0。另外，虽然NaN不严格相等于自身，但Map将其视为同一个键。
+      实例属性和方法：size、set、get、has、delete、clear
+      遍历方法：keys（）、values（）、entries（）、forEach（）、for...of...
+3. 解构
+4. 箭头函数：箭头函数的this指向定义时的对象，而不是执行时的对象，内外相同指向window
+5. 延展扩展符（...）
+    通过它可以将数组作为参数直接传入函数；在函数定义时可以通过…rest获取定义参数外的所有参数
+6. 类
+    es5:
+      function Point(x, y) {  
+        this.x = x;  
+        this.y = y;  
+      }  
+        
+      Point.prototype.toString = function () {  
+        return '(' + this.x + ', ' + this.y + ')';  
+      };  
+        
+      var p = new Point(1, 2); 
+
+    es6: 
+      //定义类  
+      class Point {  
+        constructor(x, y) {//默认自带的构造函数，不显示声明则是个空的  
+          this.x = x;  
+          this.y = y;  
+        }  
+        
+        toString() {  
+          return this.x + ', ' + this.y;  
+        }  
+      }  
+        
+      class Line extends Point {  
+          constructor(m,n,l){  
+              super(m,n);//调用父类的构造函数  
+              this.l = l;  
+          }  
+            
+          toLine(){  
+              return '('+this.l +','+ super.toString()+')';  
+          }  
+      }   
+        
+      var p = new Point(2,3);  
+      var l = new Line(2,3,4);  
+      p.toString();   //2,3  
+      l.toString();   //2,3  
+      l.getSum(); //（4，2，3）
+
+  需注意几点：
+      1.子类必须在constructor中调用super后才能使用this对象。
+      2.如果子类不显示定义一个constructor，那么会存在一个默认的constructor(...args){super(...args)}方法
+      3.对象.prototype.constructor = 对象本身
+      4.子类的__proto__属性，表示构造函数的继承，总是指向父类。（即：Line._proto_=Point）
+      5.子类prototype属性的__proto__属性，表示方法的继承，总是指向父类的（即：Line.prototype._proto_=Point.prototype）
+
+7. 模板字符串(``)
+8. Promise
+    new Promise(function(){})
+      .then(function(){promise成功执行此处}, function(err){promise失败执行此处})
+9. 模块化
+
+es5转es6: Babel

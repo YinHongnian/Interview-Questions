@@ -1,0 +1,53 @@
+Bootstrap采用12列的栅格体系, 根据主流设备的尺寸进行分段, 每段宽度固定, 通过百分比和每天查询实现响应式布局
+
+.container{
+  /* 为了避免屏幕占满, 左右两边各留15px边距 */
+  padding-right: 15px;
+  padding-left: 15px;
+  /* 将container居中 */
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* 媒体查询确定顶层container宽度 */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+Bootstrap划分了四种尺寸：超小屏（手机）、小屏（平板竖屏）、中屏（平板横屏）和大屏（PC），每一类中顶层包含块container的宽度都是固定的。
+还可以使用.container-fluid将固定宽度转换为连续的宽度（width=100%）。
+
+所有列设置float:left , 宽度为非整数百分比
+
+/* 通过设置margin为负值及盒子模型使row扩展到min-width的值, 即消除container设置的margin边距值 */
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+给所有column栅格都设置15px的padding使所有column都可以看成一个container, 也就可以在任意一个column内再嵌套栅格系统, 而无需再添加container,只需添加row就可以了
+
+列排序与列偏移是因为所有的列都设置了position: relative

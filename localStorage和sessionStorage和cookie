@@ -1,0 +1,57 @@
+1. localStorage 有效期为永久, sessionStorage有效期为顶层窗口关闭前
+2. 同源文档可以读取并修改localStorage数据, sessionStorage只允许同一个窗口下的文档访问, 如通过iframe引入的同源文档
+3. Storage对象通常被当做普通javascript对象使用: 通过设置属性来存取字符串值, 也可以通过setItem(key,value)设置,
+    getItem(key)读取,removeItem(key)删除, clear()删除所有数据, length表示已存储的数据项数目,key(index)返回对应索引的key
+
+localStorage.setItem('x', 1)      // storage x -> 1
+localStorage.getItem('x')     // return value of x
+
+// 枚举所有存储的键值对
+for(var i = 0, len = localStorage.length; i < len; ++i) {
+  var name = localStorage.key(i)
+  var value = localstorage.getItem(name)
+}
+
+localStorage.removeItem('x')    // remove x
+localStorage.clear()    // remove all data
+
+
+cookie及其操作:
+  cookie是web浏览器存储的少量数据, 最早设计为服务器端使用, 作为HTTP协议的扩展实现, cookie数据会自动在浏览器和服务器之间传输
+  通过读写cookie检测是否支持
+  cookie属性有名, 值, max-age, path, domain, secure
+  cookie默认有效期为浏览器会话, 一旦用户关闭浏览器, 数据就丢失, 通过设置max-age=seconds属性告诉浏览器cookie有效期
+  cookie作用域通过文档源和文档路径来确定, 通过path和domain进行配置, web页面同目录或子目录文档都可访问
+  通过cookie保存数据的方法为: 为document.cookie设置一个符合目标的字符串
+  读取document.cookie获得';'分隔的字符串, key=value解析得到结果
+
+document.cookie = 'name=qiu;max-age=9999;path=/;domain=domain;secure';
+document.cookie = 'name=aaa;path=/;domain=domain;secure';
+// 要改变cookie的值, 需要使用相同的名字, 路径和域, 新的值
+// 来设置cookie, 同样的方法可以用来改变有效期
+// 设置max-age为0可以删除指定的cookie
+
+
+Q: 三者的异同
+  共同点: sessionStorage、localStorage和cookie都由浏览器存储在本地的数据
+  区别:
+    1. cookie数据始终在同源的http请求中携带(即使不需要), 即cookie在浏览器和服务器间来回传递
+       localStorage不会自动把数据发给服务器, 仅在本地保存
+    2. cookie数据还有路径(path)的概念, 可以限制cookie只属于某个路径下, 存储大学限制也不同, cookie数据不能超过4k, 同时因为每次http请求都会携带cookie, 所以cookie只适合保存很小的数据, 如会话标识
+       localStorage在各浏览器中上限不同, 最低为2.6M
+    3. cookie只在设置的cookie过期时间之前一直有效, 即使窗口或浏览器关闭
+       localStorage始终有效,窗口或者浏览器关闭也一直保存,因此用作持久数据, 除非人为清理
+    4. localStorage支持事件通知机制，可以将数据更新的通知发送给监听者。 api 接口使用更方便。
+       而cookie的原生接口不友好，需要程序员自己封装
+    5. localStorage存储的数据是不能跨浏览器共用的, 一个浏览器只能读取各自浏览器的数据,存储空间5M
+
+    var userData = {
+      name : 'sysuzhyupeng',
+      age: 24
+    }
+    localStorage.setItem('userDate', JSON.stringify(userData));
+    var newUserData = JSON.parse(localStorage.getItem('userData'));
+
+    window.addEventListener('storage', showStorageEvent, true)
+
+

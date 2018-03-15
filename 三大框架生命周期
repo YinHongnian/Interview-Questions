@@ -1,0 +1,24 @@
+vue的生命周期:
+  beforeCreate
+  created
+  beforeMount
+    child:
+      beforeCreate
+      created
+      beforeMount
+      mounted
+  mounted
+  beforeUpdate
+  updated
+  beforeDestroy
+  destroyed
+
+Angular生命周期:
+  ngOnChanges
+  ngOnInit
+  ngDoCheck
+  ngAfterContentInit
+  ngAfterContentChecked
+  ngAfterViewInit
+  ngAfterViewChecked
+  ngOnDestroy

@@ -1,0 +1,8 @@
+1. js数据类型:
+  六大基础类型: undefined, null, string, number, boolean
+  一种复杂类型: Object
+
+2. js 对象类型
+  本地对象: Object, Function, Array, String, Boolean, Number, Date, RegExp, Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError, URIError
+  内置对象: Global, Math
+  宿主对象: DOM, BOM

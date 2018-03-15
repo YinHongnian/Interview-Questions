@@ -1,0 +1,9 @@
+原生拖拽事件(html5):
+    dragstart
+    dragenter
+    drageover
+    drag 
+    dragleave
+    dragexit
+    dragend
+    drop

@@ -1,0 +1,61 @@
+content方面:
+  1. 减少HTTP请求: 合并文件、CSS精灵、inline Image
+  2. 减少DNS查询: DNS查询完成之前浏览器不能从这个主机下载任何文件. 
+     方法: DNS缓存、将资源分布到恰当数量的主机名, 平衡并行下载和DNS查询
+  3. 避免重定向: 多余的中间访问
+  4. 使用Ajax可缓存
+  5. 非必须组件延迟加载
+  6. 未来所需组件预加载
+  7. 减少DOM元素数量
+  8. 将资源放到不同的域下: 浏览器同时从一个域下载资源的数量有限, 增加域可以提高并行下载量
+  9. 减少iframe数量(阻塞父文档onload事件)
+      (1) iframe会阻塞主页面的onload事件
+      (2) 搜索引擎的检索程序无法解读这种页面, 不利于SEO
+      (3) iframe和主页面共享连接池, 而浏览器对相同域的连接有限制, 所以会影响页面的并行加载
+
+    如需使用iframe, 最好通过javascript动态给iframe添加src属性值, 这样可以绕开以上1,3两个问题
+      
+  10. 不要404
+  11. 避免在页面的主体布局中使用table
+Server方面:
+  1. 使用CDN
+  2. 添加Expires或者Cache-Control响应头
+  3. 对组件使用Gzip压缩
+  4. 配置ETag
+  5. Flush Buffer Early
+  6. Ajax使用GET进行请求
+  7. 避免空src的img标签
+Cookie方面:
+  1. 减小cookie大小
+  2. 引入资源的域名不要包含cookie
+css方面
+  1. 将样式表放到页面顶部
+  2. 不使用CSS表达式
+  3. 使用不使用@import
+  4. 不使用IE的Filter
+  5. 当需要设置的样式很多时设置className而不是直接操作style
+javascript方面
+  1. 将脚本放到页面底部, 页面头部的<style></style>和<script></script>会阻塞页面(因为Renderer进程中, JS线程和渲染线程是互斥的)
+  2. 将javascript和css从外部引入
+  3. 压缩javascript和css
+  4. 删除不需要的脚本
+  5. 减少DOM访问
+  6. 合理设计事件监听器
+  7. 使用css3代码代替js动画(尽可能避免重绘重排以及回流)
+  8. 用innerHTML代替DOM操作，减少DOM操作次数，优化javascript性能
+  9. 少用全局变量、缓存DOM节点查找的结果。减少IO读取操作。
+图片方面
+  1. 优化图片: 根据实际颜色需要选择色深、压缩
+  2. 优化css精灵
+  3. 不要在HTML中拉伸图片
+  4. 保证favicon.ico小并且可缓存
+  5. 禁止使用gif图片实现loading效果(降低CPU消耗, 提升渲染性能)
+  6. 对于一些小图标，可以使用base64位编码，以减少网络请求。但不建议大图使用，比较耗费CPU；
+    小图标优势在于：
+      1.减少HTTP请求；
+      2.避免文件跨域；
+      3.修改及时生效
+  7. 页面中空的 href 和 src 会阻塞页面其他资源的加载 (阻塞下载进程)
+移动方面
+  1. 保证组件小于25k
+  2. Pack Components into a Multipart Document

@@ -1,0 +1,85 @@
+1. html5新语义元素, 增加代码可读性和SEO
+  <header></header>
+  <footer></footer>
+  <nav></nav>
+  <aside></aside>
+  <article></article> 一般内嵌header footer h1 p标签
+  <section></section>
+  <hgroup> h1-h6的集合
+
+  语义元素在IE6-8的兼容可以使用: document.createElement('header');
+
+2. 本地存储
+    h5提供了sessionStorage、localStorage和indexedDB加强本地存储，使用之前应该先判断支持情况
+    if(window.sessionStorage){
+      // 浏览器支持sessionStorage
+    }
+    if(window.localStorage){
+      // 浏览器支持localStorage
+    }
+
+3. 离线web应用
+  页面缓存指的还是有网络状态下, 而离线web应用指的是在没有网络状态可以运行应用
+      if(window.allicationCache){
+        // 支持离线应用
+      }
+
+  manifest文件是核心, 记录着哪些资源文件需要离线应用缓存, 要使用manifest, 只需要在html标签中添加属性
+      <html manifest="cache.manifest">
+
+  cache.manifest的文件格式如下:
+    CACHE MAINFEST
+    # 缓存的文件
+    index.html
+    test.js
+    #不做缓存
+    NETWORK
+    /images/
+    FALLBACK
+    offline.html index.html
+    #缓存的文件下面是当网络不可用时，文件直接从本地缓存读取，
+    #NETWORK下面的文件无论是否已经缓存，都要从网络中下载。FALLBACK后面，当无法获取到offline.html，则转到index.html。 
+
+4. 表单新增功能
+    1. 以往input中的name和value要随着form表单一起提交，form表单必须包裹input , 而现在可以通过input的form属性綁定
+          <form id="testform">
+              <input type="text" />  
+          </form> 
+          <input form=testform />
+    2. placeholder属性
+        <input type="text" placeholder="请输入密码" />
+    3. autofocus属性, 页面只能有一个
+        <input type="text" autofocus />
+    4. 新的输入型控件（type值）, 如email、tel、url、search、range、number、color、datetime、datetime-local、time、date、week、month
+    5. required
+    6. 正则， pattern="\d{1,5}“
+
+5. CSS3提供了更多的选择器，before、after、first-child、nth-child。
+   提供的效果包括box-shadow、text-shadow、background-size
+   还可以使用media-query实现响应式布局
+      @media (max-width: 1190px) {
+          ...
+      }
+
+6. 地理定位
+    h5提供了Geolocation API访问地理位置，即通过window.navigator.geolocation来实现访问。这个对象有三个方法：
+       getCurrentPosition()
+        watchPosition()    // 可以对位置变化事件进行监听
+        clearWatch 
+
+7. canvas和svg
+      <canvas id="myCanvas"></canvas>
+      <script type="text/javascript">
+        var canvas=document.getElementById('myCanvas');
+        var ctx=canvas.getContext('2d');
+        ctx.fillStyle='#FF0000';
+        ctx.fillRect(0,0,80,100);
+      </script>
+8. 用于媒介回放的video和audio元素
+9. 使用html5shiv可以解决ie低版本不兼容的问题，只需要在head中加上,当版本低于IE9时，浏览器会加载html5.js脚本，使得支持html5的新功能，也可以将脚本文件下载到本地
+      <head>
+        <!--[if lt IE 9]>
+        <script src='http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js'>
+        </script>
+        <![endif]-->
+      </head>

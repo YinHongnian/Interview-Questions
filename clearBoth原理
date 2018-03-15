@@ -1,0 +1,30 @@
+清除浮动的原理, 就是给浮动元素留下足够的垂直外边距给浮动元素
+  <div>
+    <div style="float:left"></div>
+  </div>
+这个效果是外层div不会包含内层div, 因为浮动的元素脱离了原始文档流
+以上面这个为例：一般而言 ，有三种方式清除浮动：
+第一：让外层元素也浮动，例如：
+        <div style="float:left" >
+          <div style="float:left"></div>
+        </div>
+        然后在此元素之外的元素上添加 clear:both效果。
+第二：给外层div的末尾添加一个元素，并利用此元素清除浮动。例如：
+      <div style="clearfix" >
+        <div style="float:left"></div>
+      </div>
+      .clearfix:after{
+      content:".";
+      display:block;
+      visibility:hidden;
+      height:0;
+      clear:both;
+      }
+
+      .clearfix{display:inline-block}
+      .clearfix{display:block}
+      其中后面的两个 是为了兼容其他浏览器设置的。因为：after不是所有浏览器都支持的。
+第三：利用 overflow属性。
+      <div style="overflow:hidden" >
+        <div style="float:left"></div>
+      </div>

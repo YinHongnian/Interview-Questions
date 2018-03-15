@@ -1,0 +1,80 @@
+1. css3的选择器
+    :last-child
+    :nth-child(n)
+    :nth-last-child(n) 倒数第n个子元素
+2. @Font-face特性
+    Font-face 可以用来加载字体样式，而且它还能够加载服务器端的字体文件，让客户端显示客户端所没有安装的字体。
+    示例: 
+        @font-face {
+          font-family: BorderWeb;
+          src: url(BORDERW0.eot);
+        }
+        @font-face {   
+          font-family: Runic;   
+          src:url(RUNICMT0.eot);   
+        }
+        .border {
+          font-size: 35px;
+          color: black;
+          font-family: "BorderWeb";
+        }
+        .event {
+          font-size: 110px;
+          color: black;
+          font-family: "Runic";
+        }
+        /* 淘宝网字体使用 */
+        @font-face {  
+          font-family: iconfont;  
+          src: url(//at.alicdn.com/t/font_1465189805_4518812.eot);                
+        }
+3. 圆角
+    border-radius: 15px;
+
+4. 阴影
+    .class1{   
+      text-shadow:5px 2px 6px rgba(64, 64, 64, 0.5);   
+    }  
+
+5. 渐变
+    background-image:-webkit-gradient(linear,0% 0%,100% 0%,from(#2A8BBE),to(#FE280E));  
+
+6. css弹性盒子模型
+7. CSS3制作特效
+    1. transition
+      transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s; 
+      即: 
+       transition-property:border-color, background-color, color;  
+       transition-duration:.5s, .5s, .5s;  
+       transition-timing-function:ease-in, ease-in, ease-in;  
+       transition-delay:.1s, .1s, .1s; 
+    2. transforms 2D
+          主要包括 translate（水平移动）、rotate（旋转）、scale（伸缩）、skew（倾斜）
+    3. Animation动画特效
+          .main{  
+            position: absolute;  
+            left: 10px;  
+            top:200px;  
+            height:45px;  
+            width: 300px;  
+            background-color:cadetblue;  
+          }  
+          .main:hover{  
+              animation: animations 2s ease 0s;  
+          }  
+          @keyframes animations {  
+              0%{  
+                  left: 10px;  
+                  opacity: 1;  
+              }  
+              50%,70%{  
+                  left: 50%;  
+                  opacity: .7;  
+                  margin-left:-150px;  
+              }  
+              100%{  
+                  left: 100%;  
+                  opacity: 0;  
+                  margin-left:-300px;  
+              }  
+          }  
