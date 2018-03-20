@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .red-packets {
+      z-index: 2;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width: 220px;
+      height: 160px;
+      background: transparent url('timg.jpg') no-repeat center center;
+    }
+
+    #wrap {
+      float: left;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    #wrap:after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+
+    #container {
+      width: 400px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #container img {
+      width: 400px;
+      transition: all 1s linear;
+    }
+
+    #container .luckInfo {
+      position: relative;
+      font-size: 10px;
+      text-align: center;
+      background-color: rgb(233, 59, 59);
+      height: 30px;
+      padding: 0 100px;
+      line-height: 30px;
+      color: #fff;
+      overflow: hidden;
+    }
+    #container ul {
+      position: absolute;
+      top: -20px;
+      left: 0px;
+      transition: all 0.5s linear;
+    }
+    #container li {
+      float: left;
+      margin: 10px;
+      list-style: none;
+    }
+    #container h4 {
+      color: rgb(85, 84, 84);
+    }
+
+    #container p {
+      color: rgb(122, 120, 120);
+      width: 400px;
+      padding: 5px;
+      word-break: inherit;
+    }
+
+    #container #btn {
+      background-color: red;
+      padding: 10px 20px;
+      margin: 10px 150px;
+      border: none;
+      color: #fff;
+    }
+
+    #container #close {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 一个屏幕自动跑的红包，点开里面是个屏幕居中的抽奖转盘，有流动凭和抽奖明细现实。
+      叉掉红包，红包15-20秒后再次显示，或者滑动一个屏幕像素红包再次显示。
+      红包不影响屏幕点击，抽奖装盘影响屏幕点击。不可以用插件或框架，只可以用原生js写。 -->
+
+  <div style="width: 100%; height: 100%; z-index: 1">
+    <button onclick="alert('我是屏幕上的其他点击');">其他点击</button>
+    <div class="red-packets"></div>
+  </div>
+  <div id="wrap">
+    <div id="container">
+      <img src="Lottery_turntable.jpg" alt="抽奖转盘">
+      <button id="btn">点我抽奖</button>
+      <div class="luckInfo">
+        <ul class="list"></ul>
+      </div>
+      <div>
+        <h4>抽奖规则</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, sint? Totam, tenetur accusantium nostrum quaerat
+          dicta ad magnam eligendi itaque laborum earum veritatis, vitae placeat doloremque adipisci at aliquid sapiente!</p>
+      </div>
+      <div id="close">X</div>
+    </div>
+  </div>
+
+  <script>
+    var redPackets = document.getElementsByClassName('red-packets')[0]
+    // 屏幕自动跑的红包
+    function setPosition() {
+      let w = document.documentElement.clientWidth || document.body.clientWidth
+      let h = document.documentElement.clientHeight || document.body.clientHeight
+      let positionX = Math.random() * ((w - 220) || 0)
+      let positionY = Math.random() * ((h - 160) || 0)
+      redPackets.style.left = positionX.toString() + "px"
+      redPackets.style.top = positionY.toString() + "px"
+    }
+    var timer = setInterval(function () {
+      setPosition()
+    }, 1000)
+
+    // 点击显示抽奖转盘
+    var wrap = document.getElementById("wrap")
+    redPackets.onclick = function () {
+      clearInterval(timer)
+      // 流动条
+      let lucklist = [{ name: '张三三', award: '一等奖' }, { name: '李四', award: '二等奖' }, { name: '王小五', award: '一等奖' }]
+      var list = document.getElementsByClassName('list')[0]
+      for (let i = 0; i < lucklist.length; i++) {
+        let li = document.createElement("li")
+        li.innerHTML = lucklist[i].name + "中奖" + lucklist[i].award
+        list.appendChild(li)
+      }
+      wrap.style.display = "block"
+      wrap.style.height = window.innerHeight + "px"
+    }
+    // 轮播
+    // 获得li的宽度
+    // ul向左移动li宽度的值
+    setInterval(function () {
+      
+    }, 1000)
+
+    // btn单击事件
+    var btn = document.getElementById('btn')
+    btn.onclick = function(){
+      btn.previousSibling.previousElementSibling.style.transition = "rotate(90deg)"
+    }
+  </script>
+</body>
+
+</html>

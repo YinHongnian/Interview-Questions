@@ -1,0 +1,25 @@
+排序:
+  arr.sort(function(a,b){return a-b})
+
+乱序:
+  方法一: 
+    function shuffle(a){
+      var b = []
+      while (a.lenght > 0) {
+        var index = parseInt(Math.random() * (a.length - 1))
+        b.push(a[index])
+        a.splice(index, 1)
+      }
+      return b
+    }
+  
+  方法二:
+    function shuffle(a){
+      var len = a.length
+      for(var i = 0; i < len - 1; i++){
+        var index = parseInt(Math.random() * (a.length - 1))
+        var temp = a[index]
+        a[index] = a[len - i - 1]
+        a[len - i - 1] = temp
+      }
+    }
