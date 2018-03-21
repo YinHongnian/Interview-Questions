@@ -1,0 +1,34 @@
+js中有三种常用的绑定事件的方法: 
+    1. 在DOM元素中直接绑定
+        <input onclick="alert('谢谢支持')" type="button" value="点击我，弹出警告框" />
+        这种方法违背了html和js分离的原则
+
+    2. 在js代码中绑定
+        在JavaScript代码中绑定事件的语法为：
+            elementObject.onXXX=function(){
+                // 事件处理代码
+            }
+
+            其中：
+                elementObject 为DOM对象，即DOM元素。
+                onXXX 为事件名称。
+        这种方法一个事件只能绑定一个响应函数, 后来的函数会替换旧函数
+
+    3. 绑定事件监听函数
+        绑定事件的另一种方法是用 addEventListener() 或 attachEvent() 来绑定事件监听函数。
+        addEventListener()函数语法：
+            elementObject.addEventListener(eventName,handle,useCapture);
+            elementObject	DOM对象（即DOM元素）。
+            eventName	事件名称。注意，这里的事件名称没有“ on ”，如鼠标单击事件 click ，鼠标双击事件 doubleclick ，鼠标移入事件 mouseover，鼠标移出事件 mouseout 等。
+            handle	事件句柄函数，即用来处理事件的函数。
+            useCapture	Boolean类型，是否使用捕获，一般用false 。true表示该元素在事件的“捕获阶段”（由外往内传递时）响应事件；false表示该元素在事件的“冒泡阶段”（由内向外传递时）响应时间。
+
+        attachEvent()函数语法：
+            elementObject.attachEvent(eventName,handle);
+            elementObject	DOM对象（即DOM元素）。
+            eventName	事件名称。注意，与addEventListener()不同，这里的事件名称有“ on ”，如鼠标单击事件 onclick ，鼠标双击事件 ondoubleclick ，鼠标移入事件 onmouseover，鼠标移出事件 onmouseout 等。
+            handle	事件句柄函数，即用来处理事件的函数。
+
+        注意：事件句柄函数是指“ 函数名 ”，不能带小括号。
+             addEventListener()是标准的绑定事件监听函数的方法，是W3C所支持的，Chrome、FireFox、Opera、Safari、IE9.0及其以上版本都支持该函数；
+             但是，IE8.0及其以下版本不支持该方法，它使用attachEvent()来绑定事件监听函数。所以，这种绑定事件的方法必须要处理浏览器兼容问题。

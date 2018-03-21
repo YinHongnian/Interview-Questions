@@ -146,15 +146,16 @@
         li.innerHTML = lucklist[i].name + "中奖" + lucklist[i].award
         list.appendChild(li)
       }
+      let li = document.createElement("li")
+      li.innerHTML = lucklist[0].name + "中奖" + lucklist[0].award
+      list.appendChild(li)
       wrap.style.display = "block"
       wrap.style.height = window.innerHeight + "px"
     }
     // 轮播
-    // 获得li的宽度
-    // ul向左移动li宽度的值
-    setInterval(function () {
+    function move(dir,width){
       
-    }, 1000)
+    }
 
     // btn单击事件
     var btn = document.getElementById('btn')

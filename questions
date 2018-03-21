@@ -13,7 +13,7 @@ video和audio在不同手机系统会有什么不一样，如何解决
 说说nodo是什么和他的用法
 说说ajax的原理
 讲讲你是如何使用php和mysql的
-如何做动画的
+如何做动画的(css3和requestAnimationFrame)
 pc端的响应式你是怎么做的
 说说你笔试的重构题的思路是怎样的
 

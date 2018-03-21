@@ -1,5 +1,5 @@
 1. js数据类型:
-  六大基础类型: undefined, null, string, number, boolean
+  五大基础类型: undefined, null, string, number, boolean
   一种复杂类型: Object
 
 2. js 对象类型

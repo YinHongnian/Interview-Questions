@@ -1,0 +1,33 @@
+1. $("#")
+2. $("#idName")
+3. $(".className")
+4. $("div")
+5. $(".className1.className2")   
+    <div class="className1 className2"></div>
+6. $("p:first")
+    第一个p元素
+7. $("p:last")
+8. $("li:even")
+    所有偶数li
+9. $("li:odd")
+    所有奇数li
+10. $("ul li:eq(3)")
+    列表中第四个元素(index为3的li)
+11. $("ul li:gt(3)")
+    列表中index大于3的元素
+12. $("ul li:lt(3)")
+    列表中index小于3的元素
+13. $("input:not(:empty)")
+    所有不为空的 input 元素
+14. $("[href]")
+    所有带有 href 属性的元素
+15. $("[href='#']")
+    所有 href 属性的值等于 "#" 的元素
+16. $("[href!='#']")
+    所有 href 属性的值不等于 "#" 的元素
+17. $("[href$='.jpg']")
+    所有 href 属性的值包含以 ".jpg" 结尾的元素
+18. $(":selected")
+    所有被选取的 input 元素
+19. $(":checked")
+    所有被选取的 input 元素
