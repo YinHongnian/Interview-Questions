@@ -1,0 +1,53 @@
+1. 可以去官网或github下载“masonry.pkgd.min.js”，将下载到的插件添加到项目中，并在页面中添加引用，如下所示：
+      <script src="js/masonry/masonry.pkgd.min.js" type="text/javascript" charset="utf-8"></script>
+    masonry.pkgd.js un-minified
+    masonry.pkgd.min.js minified
+
+    官网：http://masonry.desandro.com/
+
+    源码：https://github.com/desandro/masonry
+
+    var msnry = new Masonry('#grid', {
+                itemSelector: '.grid-item',
+                columnWidth: 200
+            });
+
+    常用属性如下：
+      itemSelector : '.item',//瀑布流布局中的单项选择器
+      columnWidth : 240 ,//一列的宽度
+      isAnimated:true,//使用jquery的布局变化，是否启用动画
+      animationOptions:{
+        //jquery animate属性 渐变效果 Object { queue: false, duration: 500 }
+      },
+      gutterWidth:0,//列的间隙 Integer
+      isFitWidth:true,//是否适应宽度 Boolean
+      isResizableL:true,//是否可调整大小 Boolean
+      isRTL:false,//是否使用从右到左的布局 Boolean
+
+2. imagesLoaded 是一个用于来检测网页中的图片是否载入完成的 JavaScript 工具库。支持回调的获取图片加载的进度，还可以绑定自定义事件。可以结合 jQuery、RequireJS 使用。
+
+    官网：http://imagesloaded.desandro.com/
+
+    源码：https://github.com/desandro/imagesloaded
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/imagesloaded-master/imagesloaded.pkgd.min.js" type="text/javascript" charset="utf-8"></script>
+        <script>
+            imagesLoaded(document.querySelector('#div1'), function(instance) {
+                alert('所有的图片都加载完成了');
+            });
+
+            $('#div1').imagesLoaded()
+                .always(function(instance) {
+                    console.log('all images loaded');
+                })
+                .done(function(instance) {
+                    console.log('all images successfully loaded');
+                })
+                .fail(function() {
+                    console.log('all images loaded, at least one is broken');
+                })
+                .progress(function(instance, image) {
+                    var result = image.isLoaded ? 'loaded' : 'broken';
+                    console.log('image is ' + result + ' for ' + image.img.src);
+                });
+        </script>
