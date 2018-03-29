@@ -32,3 +32,92 @@ js中有三种常用的绑定事件的方法:
         注意：事件句柄函数是指“ 函数名 ”，不能带小括号。
              addEventListener()是标准的绑定事件监听函数的方法，是W3C所支持的，Chrome、FireFox、Opera、Safari、IE9.0及其以上版本都支持该函数；
              但是，IE8.0及其以下版本不支持该方法，它使用attachEvent()来绑定事件监听函数。所以，这种绑定事件的方法必须要处理浏览器兼容问题。
+
+手写原生js实现事件代理,并要求兼容浏览器:
+    function delegateEvent(interfaceEle, selector, type, fn) {
+        if(interfaceEle.addEventListener){
+            interfaceEle.addEventListener(type, eventfn, false)
+        } else {
+            interfaceEle.attachEvent("on"+type, eventfn)
+        }
+
+        function eventfn(e) {
+            var e = e || window.event 
+            var target = e.target || e.srcElement
+            if(matchSelector(target, selector)){
+                if(fn) {
+                    fn.call(target, e)
+                }
+            }
+        }
+    }
+
+    /**
+    * only support #id, tagName, .className
+    * and it's simple single, no combination
+    */
+    function matchSelector(ele, selector){
+        // if use id
+        if(selector.charAt(0) === "#"){
+            return ele.id === selector.slice(1)
+        }
+        // if use class
+        if(selector.charAt(0) === "."){
+            return (" " + ele.className + " ").indexOf(" " + selector.slice(1) + " ") != -1
+        }
+        // if use tagName
+        return ele.tagName.toLowerCase() === selector.toLowerCase();
+    }
+    //调用
+    var odiv = document.getElementById("oDiv");
+    delegateEvent(odiv,"a","click",function(){
+        alert("1");
+    })
+
+事件如何派发也就是事件广播（dispatchEvent）:
+    一般我们在元素上绑定事件后，是靠用户在这些元素上的鼠标行为来捕获或者触发事件的，或者自带的浏览器行为事件，比如click，mouseover，load等等，有些时候我们需要自定义事件或者在特定的情况下需要触发这些事件。
+    这个时候我们可以使用IE下fireEvent方法，高级浏览器（chrome,firefox等）有dispatchEvent方法
+    IE:
+        // document上绑定自定义事件ondataavailable
+        document.attachEvent('ondataavailable', function (event) {
+            alert(event.eventType)
+        })
+        var obj = document.getElementById("obj")
+        // obj元素上绑定click事件
+        obj.attachEvent("onclick", function(event){
+            alert(event.eventType)
+        })
+        // 调用document对象的createEventObject方法得到一个event的对象实例
+        var event = document.createEventObject()
+        event.eventType = 'message'
+        // 触发document上绑定的自定义事件ondataavailable
+        document.fireEvent('ondataavailable', event)
+        // 触发obj元素上绑定的click事件
+        document.getElementById("test").onclick = function(){
+            obj.fireEvent('onclick', event)
+        }
+
+    高级浏览器（chrome,firefox等）的例子:
+        // document上绑定自定义事件ondataavailable
+        document.addEventListener('ondataavailable', function(event){
+            alert(event.eventType)
+        }, false)
+        var obj = document.getElementById("obj")
+        // obj元素上绑定click事件
+        obj.addEventListener('click', function(event){
+            alert(event.eventType)
+        }, false)
+        // 调用document对象的createEvent方法得到一个event对象实例
+        var event = document.createEvent('HTMLEvents')
+        // initEvent接受3个参数
+        // 事件类型, 是否冒泡, 是否阻止浏览器默认行为
+        event.initEvent("ondataavailable", true, true)
+        event.eventType = 'message'
+        // 触发document上绑定的自定义事件ondataavailable
+        document.dispatchEvent(event)
+        event1.initEvent("click", true, true)
+        event1.eventType = 'message'
+        //触发obj元素上绑定click事件
+        document.getElementById("test").onclick = function () {
+            obj.dispatchEvent(event1);
+        }
