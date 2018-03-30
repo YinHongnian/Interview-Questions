@@ -1,7 +1,7 @@
 1. 创建XMLHttpRequest对象
     var xhr
     if(window.XMLHttpRequest) {
-        xhr = new XMLHpptRequest()
+        xhr = new XMLHttpRequest()
     } else {
         xhr = new ActiveXObject("Microsoft.XMLHTTP")
     }
