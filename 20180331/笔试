@@ -1,0 +1,44 @@
+1. 怎么实现单击表格, 该单元格背景变为红色
+  <table id="t1">
+    <tr>
+      <td>123</td>
+      <td>234</td>
+      <td>345</td>
+    </tr>
+  </table>
+
+2. 以下题目的输出
+  A.  for(var i = 0; i < 5; i++){
+        console.log(i)
+      }
+  B.  for(var i = 0; i < 5; i++){
+        setInterval(function(){
+          console.log(i)
+        }, i * 1000)
+      }
+  C.  for(var i = 0; i < 5; i++){
+        (setInterval(function(){
+          console.log(i)
+        }, i * 1000))() 
+      }
+  D.  for(var i = 0; i < 5; i++){
+        function(i) {
+          setInterval(function(){
+            console.log(i)
+          }, i * 1000)
+        }
+      }
+  E.  for(var i = 0; i < 5; i++){
+        function() {
+          setInterval(function(){
+            console.log(i)
+          }, i * 1000)
+        }
+      }
+  F.  for(var i = 0; i < 5; i++){
+        (setInterval(function(){
+          console.log(i)
+        }, i * 1000))(i) 
+      }
+
+3.  数组[1,2,3,4]有多少数字不重复的三位数组成
